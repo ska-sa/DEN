@@ -148,4 +148,4 @@ inputs:
       position: 21
       valueFrom: $(self.basename)
 
-outputs:
+outputs: []

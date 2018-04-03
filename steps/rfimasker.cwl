@@ -71,4 +71,4 @@ inputs:
       position: 9
       valueFrom: $(self.basename)
 
-outputs:
+outputs: []
