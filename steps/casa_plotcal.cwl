@@ -4,7 +4,7 @@ class: CommandLineTool
 
 requirements:
   - class: DockerRequirement
-    dockerPull: stimela/casa:0.3.1
+    dockerImageId: ska-sa/den
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:

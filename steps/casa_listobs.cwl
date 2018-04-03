@@ -4,7 +4,7 @@ class: CommandLineTool
 
 requirements:
   - class: DockerRequirement
-    dockerImage: ska-sa/den
+    dockerImageId: ska-sa/den
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:
