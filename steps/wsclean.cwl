@@ -6,7 +6,7 @@ $namespaces:
   cwltool: http://commonwl.org/cwltool#
 requirements:
   - class: DockerRequirement
-    dockerPull: stimela/wsclean:0.2.9
+    dockerImageId: ska-sa/den
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:
