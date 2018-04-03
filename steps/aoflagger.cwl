@@ -4,7 +4,7 @@ class: CommandLineTool
 
 requirements:
   - class: DockerRequirement
-    dockerPull: stimela/aoflagger:0.3.2
+    dockerImageId: ska-sa/den
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:

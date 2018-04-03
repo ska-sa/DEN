@@ -4,7 +4,7 @@ class: CommandLineTool
 
 requirements:
   - class: DockerRequirement
-    dockerPull: stimela/casa:0.3.2
+    dockerImageId: ska-sa/den
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:
@@ -18,6 +18,26 @@ requirements:
       writable: false
 baseCommand: flagdata
 stdout: log-casa_flagdata.txt
+
+
+arguments:
+  - prefix: -c 
+    valueFrom: |
+      # JavaScript uses lowercase for bools
+      true = True
+      false = False
+
+      flagdata(
+        vis=$( inputs.vis.path ),
+        mode=$( inputs.mode ),
+        autocorr=$( inputs.autocorr ),
+        quackmode=$( inputs.quackmode ),
+        quackinterval=$( inputs.quackinterval ),
+        spw=$( inputs.spw )
+        timerange=$( inputs.timerange ),
+        scan=$( inputs.scan ),
+        antenna=$( inputs.antenna ),
+        )
 
 inputs:
   mode:
