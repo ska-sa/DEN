@@ -176,7 +176,7 @@ inputs:
       prefix: -gainfield
       position: 28
   interp:
-    type: array
+    type: int[]
     doc: "Temporal interpolation for each gaintable (=linear)"
     inputBinding:
       prefix: -interp

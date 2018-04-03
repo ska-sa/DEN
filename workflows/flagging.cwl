@@ -13,48 +13,52 @@ inputs:
   bands: string
   uvrange: string
   spwid: int[]
-  mask: mask
+  mask: File
  
-outputs: [aoflagger/flagged_ms]
+outputs:
+  flagged_ms:
+    type: Directory
+    outputSource: aoflagger/ms_out
 
 steps:
   autocorr:
     run: ../steps/casa_flagdata.cwl
     in:
-      ms: ms
-      autocorr: True
-    out: [flagged_ms]
+      vis: ms
+      autocorr:
+        valueFrom: "true"
+    out: [vis_out]
 
   frequency:
     run: ../steps/casa_flagdata.cwl
     in:
       spw: spw
-      ms: autocorr/flagged_ms
-    out: [flagged_ms]
+      vis: autocorr/vis_out
+    out: [vis_out]
       
   time:
     run: ../steps/casa_flagdata.cwl
     in:
       timerange: timerange
-      ms: frequency/flagged_ms
-    out: [flagged_ms]
+      vis: frequency/vis_out
+    out: [vis_out]
  
   quack:
     run: ../steps/casa_flagdata.cwl
     in:
       quackmode: quackmode
       quackinterval: quackinterval
-      ms: frequency/flagged_ms
-    out: [flagged_ms]
+      vis: time/vis_out
+    out: [vis_out]
 
   rfimasker:
     run: ../steps/rfimasker.cwl
     in:
-      ms: quack/flagged_ms
+      ms: quack/vis_out
       uvrange: uvrange
       spwid: spwid
       mask: mask
-    out: [flagged_ms]
+    out: [ms_out]
 
   aoflagger:
     run: ../steps/aoflagger.cwl
@@ -63,7 +67,7 @@ steps:
       column: column
       fields: fields
       bands: bands
-      ms: rfimasker/flagged_ms
-    out: [flagged_ms]
+      ms: rfimasker/ms_out
+    out: [ms_out]
 
 

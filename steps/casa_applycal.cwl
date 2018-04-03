@@ -81,7 +81,7 @@ inputs:
       prefix: -interp
       separate: true
   spwmap:
-    type: array[]
+    type: string
     doc: "Spectral windows combinations to form for gaintables(s)"
     inputBinding:
       prefix: -spwmap
