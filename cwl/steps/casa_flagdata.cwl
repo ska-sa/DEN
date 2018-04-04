@@ -28,21 +28,33 @@ baseCommand: casa
 arguments:
   - prefix: -c 
     valueFrom: |
+      from __future__ import print_function
+
       # JavaScript uses lowercase for bools
       true = True
       false = False
+      null = None
 
-      flagdata(
-        vis=$( inputs.vis.path ),
-        mode=$( inputs.mode ),
-        autocorr=$( inputs.autocorr ),
-        quackmode=$( inputs.quackmode ),
-        quackinterval=$( inputs.quackinterval ),
-        spw=$( inputs.spw )
-        timerange=$( inputs.timerange ),
-        scan=$( inputs.scan ),
-        antenna=$( inputs.antenna ),
-        )
+      args = ${
+        var names = ['autocorr', 'vis', 'mode', 'field', 'spw', 'antenna', 'timerange', 'correlation', 'scan',  'intent', 'array', 'uvrange'];
+        var values = {};
+
+        for (var i = 0; i < names.length; i++) {
+            var name = names[i];
+            var input = inputs[name];
+            if (input) {
+              if (input.class == 'Directory') {
+                values[name] = input.path;
+              } else {
+                values[name] = input;
+              }
+            }
+        }
+        return values;
+      }
+      print(args, file=sys.stderr)
+      flagdata(**args)
+
 
 inputs:
   mode:
