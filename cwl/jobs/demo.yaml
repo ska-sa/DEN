@@ -9,7 +9,7 @@ quackinterval: 0.2
 column: "DATA"
 fields: ["1"]
 bands: [1]
-uvrange: "gijs"
+uvrange: "0~1"
 spwid: [1]
 
 mask:

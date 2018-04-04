@@ -10,8 +10,8 @@ requirements:
     - entry: $(inputs.ms)
       writable: true
 
-baseCommand: rfimasker
-stdout: log-rfimasker.txt
+baseCommand: mask_ms.py
+#stdout: log-rfimasker.txt
 
 inputs:
   accumulation_mode:
@@ -52,14 +52,13 @@ inputs:
     type: Directory
     doc: "MS to flagged"
     inputBinding:
-      prefix: --ms
-      #valueFrom: $(self.basename)
+      position: 1
   mask:
     type: File
     doc: "A numpy array of chan x (boolean, channel_centre[float64])"
     inputBinding:
       prefix: --mask
-      #valueFrom: $(self.basename)
+
 
 outputs:
   ms_out:

@@ -29,26 +29,23 @@ arguments:
   - prefix: -c 
     valueFrom: |
       from __future__ import print_function
-
       # JavaScript uses lowercase for bools
       true = True
       false = False
-      null = None
 
       args = ${
-        var names = ['autocorr', 'vis', 'mode', 'field', 'spw', 'antenna', 'timerange', 'correlation', 'scan',  'intent', 'array', 'uvrange'];
         var values = {};
+        var input;
 
-        for (var i = 0; i < names.length; i++) {
-            var name = names[i];
-            var input = inputs[name];
-            if (input) {
-              if (input.class == 'Directory') {
-                values[name] = input.path;
-              } else {
-                values[name] = input;
-              }
+        for(var name in inputs) {
+          input = inputs[name];
+          if (input) {
+            if (input.class == 'Directory') {
+              values[name] = input.path;
+            } else {
+              values[name] = input;
             }
+          }
         }
         return values;
       }
