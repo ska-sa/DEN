@@ -2,14 +2,22 @@
 cwlVersion: v1.0
 class: CommandLineTool
 
+
 requirements:
+  - class: SchemaDefRequirement
+    types:
+      - $import: ../types/types.yaml
+
   - class: DockerRequirement
     dockerImageId: ska-sa/den
+
   - class: InlineJavascriptRequirement
+
   - class: InitialWorkDirRequirement
     listing:
     - entry: $(inputs.vis)
       writable: true
+
 
 baseCommand: flagdata
 stdout: log-casa_flagdata.txt
@@ -102,10 +110,7 @@ inputs:
     type: float?
     doc: "Quack n seconds from scan beginning or end"
   quackmode:
-    type:
-      - "null" # hack to make enum optional
-      - type: enum
-        symbols: [beg,endb,end,tail]
+    type: quackmode?
     doc: "Quack mode. 'beg' ==> first n seconds of scan.'endb' ==> last n seconds of scan. 'end' ==> all but first n seconds of scan. 'tail' ==> all but last n seconds of scan."
   quackincrement:
     type: boolean?

@@ -80,6 +80,6 @@ inputs:
 
 outputs:
   ms_out:
-    type: Directory?
+    type: Directory
     outputBinding:
        glob: $( inputs.ms.basename )

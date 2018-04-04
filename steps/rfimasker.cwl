@@ -49,8 +49,8 @@ inputs:
     inputBinding:
       prefix: --simulate
   ms:
-    type: Directory[]
-    doc: "MS(s) to flagged"
+    type: Directory
+    doc: "MS to flagged"
     inputBinding:
       prefix: --ms
       #valueFrom: $(self.basename)

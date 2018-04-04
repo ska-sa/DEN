@@ -1,16 +1,21 @@
 cwlVersion: v1.0
 class: Workflow
 
+requirements:
+  SchemaDefRequirement:
+    types:
+      - $import: ../types/types.yaml
+
 inputs:
   ms: Directory
   spw: string
   timerange: string
-  quackmode: string
-  quackinterval: string
+  quackinterval: float
+  quackmode: quackmode?
   strategy: File
   column: string
-  fields: string
-  bands: string
+  fields: string[]
+  bands: int[]
   uvrange: string
   spwid: int[]
   mask: File
