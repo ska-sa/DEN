@@ -21,8 +21,8 @@ requirements:
       writable: true
 
 
-baseCommand: flagdata
-stdout: log-casa_flagdata.txt
+baseCommand: casa
+#stdout: log-casa_flagdata.txt
 
 
 arguments:

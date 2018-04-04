@@ -14,8 +14,8 @@ spwid: [1]
 
 mask:
   class: File
-  path: ../data/mask
+  path: ../../data/labelled_rfimask.pickle.npy
 
 strategy:
   class: File
-  path: ../data/strategy
+  path: ../../data/firstpass_QUV.rfis

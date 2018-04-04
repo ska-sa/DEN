@@ -16,7 +16,9 @@ demodata: data/meerkat_0h60s.MS/
 
 run: .venv2/bin/cwltool demodata docker
 	.venv2/bin/cwltool \
-		--tmpdir=$(PWD)/results/tmp \
+		--tmpdir=$(PWD)/results/tmp/ \
+		--cachedir=$(PWD)/results/cache/ \
+		--outdir=$(PWD)/results/results/ \
 		cwl/main.cwl \
 		cwl/jobs/demo.yaml
 

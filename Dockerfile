@@ -8,3 +8,6 @@ RUN docker-apt-install \
   pybdsf \
   cubical \
   tigger-lsm
+
+# we need to set this for casa to work properly inside docker
+ENV USER root
