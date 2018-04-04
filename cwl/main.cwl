@@ -5,7 +5,17 @@ requirements:
   - class: SubworkflowFeatureRequirement
 
 inputs:
-  vis: Directory
+  ms: Directory
+  spw: string
+  timerange: string
+  quackinterval: float
+  strategy: File
+  column: string
+  fields: string[]
+  bands: int[]
+  uvrange: string
+  spwid: int[]
+  mask: File
 
 outputs: []
 
@@ -18,7 +28,18 @@ steps:
   flagging:
     run: workflows/flagging.cwl
     in:
-      vis: vis 
+      ms: ms
+      bands: bands
+      column: column
+      fields: fields
+      mask: mask
+      quackinterval: quackinterval
+      spw: spw
+      spwid: spwid
+      strategy: strategy
+      timerange: timerange
+      uvrange: uvrange
+
     out: []
 #
 #  cross_cal:

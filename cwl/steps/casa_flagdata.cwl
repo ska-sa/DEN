@@ -13,6 +13,8 @@ requirements:
 
   - class: InlineJavascriptRequirement
 
+  - class: StepInputExpressionRequirement
+
   - class: InitialWorkDirRequirement
     listing:
     - entry: $(inputs.vis)
@@ -110,7 +112,7 @@ inputs:
     type: float?
     doc: "Quack n seconds from scan beginning or end"
   quackmode:
-    type: quackmode?
+    type: ../types/types.yaml#quackmode?
     doc: "Quack mode. 'beg' ==> first n seconds of scan.'endb' ==> last n seconds of scan. 'end' ==> all but first n seconds of scan. 'tail' ==> all but last n seconds of scan."
   quackincrement:
     type: boolean?

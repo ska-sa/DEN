@@ -70,13 +70,13 @@ inputs:
     doc: "MS name(s) to be flagged"
     inputBinding:
       prefix: -msname
-      valueFrom: $(self.basename)
+      #valueFrom: $(self.basename)
   strategy:
     type: File?
     doc: "specifies a possible customized strategy"
     inputBinding:
       prefix: -strategy
-      valueFrom: $(self.basename)
+      #valueFrom: $(self.basename)
 
 outputs:
   ms_out:

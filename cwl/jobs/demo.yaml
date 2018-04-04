@@ -1,0 +1,21 @@
+ms:
+  class: Directory
+  path: ../../data/meerkat_0h60s.MS
+
+spw: "gijs"
+timerange: "gijs"
+quackinterval: 0.2
+
+column: "DATA"
+fields: ["1"]
+bands: [1]
+uvrange: "gijs"
+spwid: [1]
+
+mask:
+  class: File
+  path: ../data/mask
+
+strategy:
+  class: File
+  path: ../data/strategy

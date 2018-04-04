@@ -2,7 +2,10 @@ cwlVersion: v1.0
 class: Workflow
 
 requirements:
-  SchemaDefRequirement:
+  - class: StepInputExpressionRequirement
+  - class: InlineJavascriptRequirement
+
+  - class: SchemaDefRequirement
     types:
       - $import: ../types/types.yaml
 
@@ -11,7 +14,7 @@ inputs:
   spw: string
   timerange: string
   quackinterval: float
-  quackmode: quackmode?
+  quackmode: ../types/types.yaml#quackmode?
   strategy: File
   column: string
   fields: string[]
@@ -31,7 +34,7 @@ steps:
     in:
       vis: ms
       autocorr:
-        valueFrom: "true"
+        valueFrom: $(true)
     out: [vis_out]
 
   frequency:
