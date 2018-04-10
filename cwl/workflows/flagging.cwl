@@ -77,5 +77,3 @@ steps:
       bands: bands
       ms: rfimasker/ms_out
     out: [ms_out]
-
-

@@ -11,7 +11,6 @@ requirements:
       writable: true
 
 baseCommand: aoflagger
-stdout: log-autoflagger.txt
 
 inputs:
   verbose:
@@ -69,14 +68,13 @@ inputs:
     type: Directory
     doc: "MS name(s) to be flagged"
     inputBinding:
-      prefix: -msname
-      #valueFrom: $(self.basename)
+      position: 100
+      valueFrom: $(self.path)
   strategy:
     type: File?
     doc: "specifies a possible customized strategy"
     inputBinding:
       prefix: -strategy
-      #valueFrom: $(self.basename)
 
 outputs:
   ms_out:

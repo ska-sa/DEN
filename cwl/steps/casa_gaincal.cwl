@@ -16,8 +16,40 @@ requirements:
     listing:
     - entry: $(inputs.gaintable)
       writable: false
-baseCommand: gaincal
-stdout: log-casa_gaincal.txt
+
+baseCommand: python
+
+arguments:
+  - prefix: -c  
+    valueFrom: |
+      from __future__ import print_function
+      import Crasa.Crasa as crasa
+      import sys 
+
+      # JavaScript uses lowercase for bools
+      true = True
+      false = False
+      null = None
+
+      args = ${
+        var values = {}; 
+
+        for (var key in inputs) {
+            var value = inputs[key];
+            if (value) {
+              if (value.class == 'Directory') {
+                values[key] = value.path;
+              } else {
+                values[key] = value;
+              }
+            }
+        }
+        return values;
+      }
+      print(args, file=sys.stderr)
+      task = crasa.CasaTask("gaincal", **args)
+      task.run()
+
 
 inputs:
   field:

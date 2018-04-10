@@ -40,7 +40,7 @@ steps:
       timerange: timerange
       uvrange: uvrange
 
-    out: []
+    out: [flagged_ms]
 #
 #  cross_cal:
 #    run: workflows/cross_cal.cwl

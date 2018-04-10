@@ -21,14 +21,14 @@ requirements:
       writable: true
 
 
-baseCommand: casa
-#stdout: log-casa_flagdata.txt
-
+baseCommand: python
 
 arguments:
   - prefix: -c 
     valueFrom: |
       from __future__ import print_function
+      import Crasa.Crasa as crasa
+      import sys
 
       # JavaScript uses lowercase for bools
       true = True
@@ -36,24 +36,23 @@ arguments:
       null = None
 
       args = ${
-        var names = ['autocorr', 'vis', 'mode', 'field', 'spw', 'antenna', 'timerange', 'correlation', 'scan',  'intent', 'array', 'uvrange'];
         var values = {};
 
-        for (var i = 0; i < names.length; i++) {
-            var name = names[i];
-            var input = inputs[name];
-            if (input) {
-              if (input.class == 'Directory') {
-                values[name] = input.path;
+        for (var key in inputs) {
+            var value = inputs[key];
+            if (value) {
+              if (value.class == 'Directory') {
+                values[key] = value.path;
               } else {
-                values[name] = input;
+                values[key] = value;
               }
             }
         }
         return values;
       }
       print(args, file=sys.stderr)
-      flagdata(**args)
+      task = crasa.CasaTask("flagdata", **args)
+      task.run()
 
 
 inputs:

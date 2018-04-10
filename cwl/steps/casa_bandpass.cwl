@@ -16,8 +16,39 @@ requirements:
     listing:
     - entry: $(inputs.callib)
       writable: false
-baseCommand: bandpass
-stdout: log-casa_bandpass.txt
+baseCommand: python
+
+arguments:
+  - prefix: -c  
+    valueFrom: |
+      from __future__ import print_function
+      import Crasa.Crasa as crasa
+      import sys 
+
+      # JavaScript uses lowercase for bools
+      true = True
+      false = False
+      null = None
+
+      args = ${
+        var values = {}; 
+
+        for (var key in inputs) {
+            var value = inputs[key];
+            if (value) {
+              if (value.class == 'Directory') {
+                values[key] = value.path;
+              } else {
+                values[key] = value;
+              }
+            }
+        }
+        return values;
+      }
+      print(args, file=sys.stderr)
+      task = crasa.CasaTask("bandpass", **args)
+      task.run()
+
 
 inputs:
   field:

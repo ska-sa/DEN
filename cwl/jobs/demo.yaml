@@ -2,15 +2,15 @@ ms:
   class: Directory
   path: ../../data/meerkat_0h60s.MS
 
-spw: "gijs"
-timerange: "gijs"
-quackinterval: 0.2
+spw: ""
+timerange: ""
+quackinterval: 10
 
 column: "DATA"
-fields: ["1"]
-bands: [1]
-uvrange: "gijs"
-spwid: [1]
+fields: ["0"]
+bands: [0]
+uvrange: ""
+spwid: [0]
 
 mask:
   class: File
