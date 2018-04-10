@@ -11,7 +11,6 @@ requirements:
       writable: true
 
 baseCommand: mask_ms.py
-stdout: log-rfimasker.txt
 
 inputs:
   accumulation_mode:
