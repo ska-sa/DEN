@@ -4,7 +4,7 @@
 all: run
 
 data/meerkat_0h60s.MS/:
-	cd data && tar Jxvf meerkat.ms.tar.xz
+	cd data && tar xvf 1477074305.ms.tar
 
 demodata: data/meerkat_0h60s.MS/
 
@@ -14,13 +14,14 @@ demodata: data/meerkat_0h60s.MS/
 .venv2/bin/cwltool: .venv2/
 	.venv2/bin/pip install -r requirements.txt
 
-run: .venv2/bin/cwltool demodata docker
+run: .venv2/bin/cwltool docker #demodata
 	.venv2/bin/cwltool \
 		--tmpdir=$(PWD)/results/tmp/ \
 		--cachedir=$(PWD)/results/cache/ \
 		--outdir=$(PWD)/results/results/ \
+        --verbose \
 		cwl/main.cwl \
-		cwl/jobs/demo.yaml
+		cwl/jobs/NGC4993_test.yml
 
 docker:
 	docker build -t ska-sa/den .

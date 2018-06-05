@@ -1,2 +1,4 @@
-cwltool
+cwlref-runner
+toil[all]
+git+https://github.com/common-workflow-language/cwltool@master
 

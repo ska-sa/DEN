@@ -15,6 +15,7 @@ inputs:
   timerange: string
   quackinterval: float
   quackmode: ../types/types.yaml#quackmode?
+  flag_mode: string
   strategy: File
   column: string
   fields: string[]
@@ -22,6 +23,8 @@ inputs:
   uvrange: string
   spwid: int[]
   mask: File
+  flag_mode_quack: string
+  flag_mode: string
  
 outputs:
   flagged_ms:
@@ -42,6 +45,7 @@ steps:
     in:
       spw: spw
       vis: autocorr/vis_out
+      mode: flag_mode
     out: [vis_out]
       
   time:
@@ -49,6 +53,7 @@ steps:
     in:
       timerange: timerange
       vis: frequency/vis_out
+      mode: flag_mode
     out: [vis_out]
  
   quack:
@@ -56,6 +61,7 @@ steps:
     in:
       quackmode: quackmode
       quackinterval: quackinterval
+      mode: flag_mode_quack
       vis: time/vis_out
     out: [vis_out]
 

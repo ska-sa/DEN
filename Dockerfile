@@ -1,7 +1,6 @@
-FROM kernsuite/base:3
+FROM stimela/casa:1.0.0
 RUN docker-apt-install \
   msutils \
-  casalite \
   aoflagger \
   rfimasker \
   wsclean \
@@ -9,7 +8,7 @@ RUN docker-apt-install \
   cubical \
   tigger-lsm \
   python-pip \
-  git\
+  git \
   python-casacore
 
 #TODO(Sphe): put this on pip

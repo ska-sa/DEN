@@ -37,7 +37,7 @@ arguments:
         for (var key in inputs) {
             var value = inputs[key];
             if (value) {
-              if (value.class == 'Directory') {
+              if (value.class == "Directory") {
                 values[key] = value.path;
               } else {
                 values[key] = value;
@@ -47,42 +47,45 @@ arguments:
         return values;
       }
       print(args, file=sys.stderr)
+      args["fluxtable"] = args.pop("fluxtable_name")
       task = crasa.CasaTask("fluxscale", **args)
       task.run()
 
 
 inputs:
   reference:
-    type: string[]
+    type: string
     doc: "Reference field name(s) (transfer flux scale FROM)"
   transfer:
-    type: string[]
+    type: string
     doc: "Transfer field name(s) (transfer flux scale TO), '' -> all"
   append:
-    type: boolean
+    type: boolean?
     doc: "Append solutions?"
   refspwmap:
-    type: string[]
+    type: string[]?
     doc: "Scale across spectral window boundaries.  See help fluxscale"
   incremental:
-    type: boolean
+    type: boolean?
     doc: "incremental caltable"
   fitorder:
-    type: int
+    type: int?
     doc: "order of spectral fitting"
   vis:
-    type: File
+    type: Directory
     doc: "Name of input visibility file (MS)"
   caltable:
-    type: File
+    type: Directory
     doc: "Name of input calibration table"
   listfile:
-    type: File
+    type: File?
     doc: "Name of listfile that contains the fit information. Default is (no file)."
+  fluxtable_name:
+    type: string
 
 outputs:
   fluxtable:
-    type: File
+    type: Directory
     doc: "Name of output, flux-scaled calibration table"
     outputBinding:
-      glob: fluxtable
+      glob: $(inputs.fluxtable_name)

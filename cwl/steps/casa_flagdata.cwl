@@ -56,10 +56,10 @@ arguments:
 
 inputs:
   mode:
-    type:
-      - "null" # hack to make enum optional
-      - type: enum
-        symbols: [manual,list,clip,quack,shadow,elevation,tfcrop,rflag,extend,unflag,summary]
+    type: string
+#      - type: enum
+#        symbols: [manual,list,clip,quack,shadow,elevation,tfcrop,rflag,extend,unflag,summary]
+    default: manual
     doc: "Flagging mode"
   field:
     type: string?

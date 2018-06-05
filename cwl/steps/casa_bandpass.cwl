@@ -10,12 +10,7 @@ requirements:
     listing:
     - entry: $(inputs.vis)
       writable: true
-    listing:
-    - entry: $(inputs.gaintable)
-      writable: false
-    listing:
-    - entry: $(inputs.callib)
-      writable: false
+
 baseCommand: python
 
 arguments:
@@ -36,8 +31,10 @@ arguments:
         for (var key in inputs) {
             var value = inputs[key];
             if (value) {
-              if (value.class == 'Directory') {
+              if ((value.class == "Directory") || (value.class == "Directory[]")) {
                 values[key] = value.path;
+              } else if ((value.class == "File") || (value.class == "File[]")) {
+                  values[key] = value.path;
               } else {
                 values[key] = value;
               }
@@ -46,54 +43,58 @@ arguments:
         return values;
       }
       print(args, file=sys.stderr)
+      if isinstance(args.get("gaintable", None), list):
+          for i,gt in enumerate(args["gaintable"]):
+              args["gaintable"][i] = args["gaintable"][i]["path"]
+      args["caltable"] = args.pop("caltable_name")
       task = crasa.CasaTask("bandpass", **args)
       task.run()
 
 
 inputs:
   field:
-    type: string
+    type: string?
     doc: "Field Name or id"
   spw:
-    type: string
+    type: string?
     doc: "Spectral windows e.g. '0~3', '' is all"
   selectdata:
-    type: boolean
+    type: boolean?
     doc: "Other data selection parameters"
   timerange:
-    type: string[]
+    type: string[]?
     doc: "Range of time to select from data, e.g. timerange = 'YYYY/MM/DD/hh:mm:ss~YYYY/MM/DD/hh:mm:ss'"
-    type: string[]
+    type: string[]?
     doc: "Select data within uvrange"
   antenna:
-    type: string[]
+    type: string[]?
     doc: "Select data based on antenna/baseline"
   scan:
-    type: string
+    type: string?
     doc: "Scan number range"
   observation:
-    type: string[]
+    type: string[]?
     doc: "Observation ID range"
   msselect:
-    type: string
+    type: string?
     doc: "Optional complex data selection (ignore for now)"
   solint:
-    type: string[]
+    type: string?
     doc: "Solution interval in time[,freq]"
   combine:
-    type: string
+    type: string?
     doc: "Data axes which to combine for solve (obs, scan, spw, and/or field)"
   refant:
-    type: string
+    type: string?
     doc: "Reference antenna name(s)"
   minblperant:
-    type: int
+    type: int?
     doc: "Minimum baselines _per antenna_ required for solve"
   minsnr:
-    type: float
+    type: float?
     doc: "Reject solutions below this SNR (only applies for bandtype = B)"
   solnorm:
-    type: boolean
+    type: boolean?
     doc: "Normalize average solution amplitudes to 1.0"
   bandtype:
     type:
@@ -101,60 +102,63 @@ inputs:
       symbols: [B,BPOLY]
     doc: "Type of bandpass solution (B or BPOLY)"
   fillgaps:
-    type: int
+    type: int?
     doc: "Fill flagged solution channels by interpolation"
   degamp:
-    type: int
+    type: int?
     doc: "Polynomial degree for BPOLY amplitude solution"
   degphase:
-    type: int
+    type: int?
     doc: "Polynomial degree for BPOLY phase solution"
   visnorm:
-    type: boolean
+    type: boolean?
     doc: "Normalize data prior to BPOLY solution"
   maskcenter:
-    type: int
+    type: int?
     doc: "Number of channels to avoid in center of each band"
   maskedge:
-    type: int
+    type: int?
     doc: "Fraction of channels to avoid at each band edge (in %)"
   smodel:
-    type: float[]
+    type: float[]?
     doc: "Point source Stokes parameters for source model."
   append:
-    type: boolean
+    type: boolean?
     doc: "Append solutions to the (existing) table"
   docallib:
-    type: boolean
+    type: boolean?
     doc: "Use callib or traditional cal apply parameters"
   gainfield:
-    type: string[]
+    type: string[]?
     doc: "Select a subset of calibrators from gaintable(s)"
   interp:
-    type: string[]
+    type: string?
     doc: "Interpolation mode (in time) to use for each gaintable"
   spwmap:
-    type: string
+    type: string?
     doc: "Spectral windows combinations to form for gaintables(s)"
   minsnr:
-    type: float
+    type: float?
     doc: "Reject solutions below this SNR (only applies for bandtype = B)"
   parang:
-    type: boolean
+    type: boolean?
     doc: "Apply parallactic angle correction"
   vis:
-    type: File
+    type: Directory
     doc: "Name of input visibility file"
   gaintable:
-    type: File[]
+    type: Directory[]
     doc: "Gain calibration table(s) to apply on the fly"
   callib:
-    type: File
+    type: File?
     doc: "Cal Library filename"
+  caltable_name:
+    type: string?
+    doc: "Name of output gain calibration table"
 
 outputs:
   caltable:
-    type: File
+    type: Directory
     doc: "Name of output gain calibration table"
     outputBinding:
-      glob: caltable
+      glob: $(inputs.caltable_name)
