@@ -42,7 +42,6 @@ arguments:
         }
         return values;
       }
-      print(args, file=sys.stderr)
       if isinstance(args.get("gaintable", None), list):
           for i,gt in enumerate(args["gaintable"]):
               args["gaintable"][i] = args["gaintable"][i]["path"]
@@ -64,7 +63,8 @@ inputs:
   timerange:
     type: string[]?
     doc: "Range of time to select from data, e.g. timerange = 'YYYY/MM/DD/hh:mm:ss~YYYY/MM/DD/hh:mm:ss'"
-    type: string[]?
+  uvrange:
+    type: string?
     doc: "Select data within uvrange"
   antenna:
     type: string[]?

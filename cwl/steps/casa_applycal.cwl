@@ -42,7 +42,9 @@ arguments:
         }
         return values;
       }
-      print(args, file=sys.stderr)
+      if isinstance(args.get("gaintable", None), list):
+          for i,gt in enumerate(args["gaintable"]):
+              args["gaintable"][i] = args["gaintable"][i]["path"]
       task = crasa.CasaTask("applycal", **args)
       task.run()
 
@@ -85,14 +87,13 @@ inputs:
     type: string[]?
     doc: "Select a subset of calibrators from gaintable(s)"
   interp:
-    type: string[]
+    type: string[]?
     doc: "Temporal interpolation for each gaintable (=linear)"
   spwmap:
     type: string?
     doc: "Spectral windows combinations to form for gaintables(s)"
   calwt:
     type: boolean[]?
-    default: [$(false)]
     doc: "Calibrate data weights per gaintable."
   parang:
     type: boolean?
@@ -119,4 +120,4 @@ outputs:
   vis_out:
     type: Directory
     outputBinding:
-      glob: $(inputs.vis.path)
+      glob: $(inputs.vis.basename)

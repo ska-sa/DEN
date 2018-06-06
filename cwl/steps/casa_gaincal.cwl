@@ -47,7 +47,6 @@ arguments:
         }
         return values;
       }
-      print(args, file=sys.stderr)
       if isinstance(args.get("gaintable", None), list):
           for i,gt in enumerate(args["gaintable"]):
               args["gaintable"][i] = args["gaintable"][i]["path"]

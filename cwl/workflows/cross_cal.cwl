@@ -10,33 +10,24 @@ requirements:
       - $import: ../types/types.yaml
 
 inputs:
-  ms: Directory
-  fluxcal_field: string
-  gaincal_field: string
-  bpasscal_field: string
+  vis: Directory
   refant: string
+  uvrange: string
   setmodel_standard: string
+  setmodel_field: string
   delaycal_field: string
   delaycal_solint: string
   delaycal_combine: string
-  pre_bpasscal_solint: string
-  pre_bpasscal_minsnr: float
-  pre_gaincal_solint: string
-  pre_gaincal_minsnr: float
+  bpasscal_field: string
   bpasscal_solint: string
-  bpasscal_interp: string
   bpasscal_combine: string
   bpasscal_fillgaps: int
   bpasscal_minsnr: float
+  gaincal_field: string
   gaincal_combine: string
   gaincal_solint: string
   gaincal_minsnr: float
-  gaincal_interp: string
-  apply_bpass: string[]
-  apply_gaincal: string[]
-  apply_target: string[]
   applymode: string
-  uvrange: string
 
 
 outputs:
@@ -49,8 +40,8 @@ steps:
   setmodel:
     run: ../steps/casa_setjy.cwl
     in:
-      vis: ms
-      field: fluxcal_field
+      vis: vis
+      field: setmodel_field
       standard: setmodel_standard
       scalebychan: 
         valueFrom: $(true)
@@ -77,16 +68,15 @@ steps:
        [caltable]
 
   bpasscal:
-    run: ../steps/casa_bandpass.cwl
+    run: ../steps/casa_bandpass_1.cwl
     in:
-      vis: delaycal/vis_out
+      vis: setmodel/vis_out
       field: bpasscal_field
       solint: bpasscal_solint
       combine: bpasscal_combine
       bandtype:
         valueFrom: "B"
       minsnr: bpasscal_minsnr
-#      interp: bpasscal_interp
       fillgaps: bpasscal_fillgaps
       gaintable: [delaycal/caltable]
       caltable_name:
@@ -95,7 +85,7 @@ steps:
     out: 
       [caltable]
 
-  gaincal_flux:
+  gaincal:
     run: ../steps/casa_gaincal.cwl
     in: 
       vis: setmodel/vis_out
@@ -105,68 +95,22 @@ steps:
       gaintype: 
         valueFrom: "G"
       minsnr: gaincal_minsnr
-#      interp: gaincal_interp
       gaintable: [delaycal/caltable,bpasscal/caltable]
       caltable_name:
         valueFrom: gaintable.G0
       uvrange: uvrange
     out:
       [caltable]
-
-  gaincal_gain:
-    run: ../steps/casa_gaincal.cwl
-    in: 
-      vis: setmodel/vis_out
-      field: gaincal_field
-      solint: gaincal_solint
-      ombine: gaincal_combine
-      gaintype:
-        valueFrom: "G"
-      minsnr: bpasscal_minsnr
-      interp: bpasscal_interp
-      append:
-        valueFrom: $(true)
-      gaintable: [delaycal/caltable,bpasscal/caltable]
-      caltable_name:
-        valueFrom: gaintable.G0
-      uvrange: uvrange
-    out:
-      [caltable]
-
-  fluxscale:
-    run: ../steps/casa_fluxscale.cwl
-    in:
-      vis: setmodel/vis_out
-      caltable: gaincal_gain/caltable
-      reference: fluxcal_field
-      transfer: gaincal_field
-      fluxtable_name:
-        valueFrom: fluxtable.F0
-    out:
-      [fluxtable]
-
-  applycal_bpasscal_field:
-    run: ../steps/casa_applycal.cwl
-    in:
-      vis: setmodel/vis_out
-      field: bpasscal_field
-      gaintable: [delaycal/caltable,bpasscal/caltable,fluxscale/fluxtable]
-      gainfield: [delaycal_field,bpasscal_field,gaincal_field]
-      interp: apply_bpass
-      applymode: applymode
-      parang:
-        valueFrom: $(false)
-    out:
-      [vis_out]
 
   applycal_gaincal_field:
     run: ../steps/casa_applycal.cwl
     in:
-      vis: applycal_bpasscal_field/vis_out
+      vis: setmodel/vis_out
       field: gaincal_field
-      gaintable: [delaycal/caltable,bpasscal/caltable,fluxscale/fluxtable]
+      gaintable: [delaycal/caltable,bpasscal/caltable,gaincal/caltable]
       gainfield: [delaycal_field,bpasscal_field,gaincal_field]
-      interp: apply_gaincal
+#      interp:
+#        valueFrom: [linear, linear, linear]
       applymode: applymode
       parang:
         valueFrom: $(false)
@@ -178,9 +122,10 @@ steps:
     in:
       vis: applycal_gaincal_field/vis_out
       field: gaincal_field
-      gaintable: [delaycal/caltable,bpasscal/caltable,fluxscale/fluxtable]
+      gaintable: [delaycal/caltable,bpasscal/caltable,gaincal/caltable]
       gainfield: [delaycal_field,bpasscal_field,gaincal_field]
-      interp: apply_target
+#      interp:
+#        valueFrom: [linear, linear, linear]
       applymode: applymode
       parang:
         valueFrom: $(false)

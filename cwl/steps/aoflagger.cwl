@@ -54,13 +54,13 @@ inputs:
     inputBinding:
       prefix: -skip-flagged
   bands:
-    type: int[]?
+    type: int?
     doc: "comma separated list of (zero-indexed) band ids to process"
     inputBinding:
       prefix: -bands
       separate: true
   fields:
-    type: string[]?
+    type: string?
     doc: "Field ID(s). Comma separated string if more than one field"
     inputBinding:
       prefix: -fields
