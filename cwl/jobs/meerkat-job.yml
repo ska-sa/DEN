@@ -1,0 +1,55 @@
+mstar:
+  class: File
+  path: ../../data/NGC4993_OFF_April18-D2-5.ms.tar
+
+### Flagging
+spw: ""
+quackinterval: 10
+flagmode_quack: quack
+autoflag_column: DATA
+autoflag_fields: PKS1934-63
+autoflag_strategy:
+  class: File
+  path: ../../data/firstpass_QUV.rfis
+
+
+### Cross calibration
+refant: m043
+uvrange: ">300"
+# setmodel
+setmodel_standard: "Perley-Butler 2010"
+setmodel_field: PKS1934-63
+# delay calibration
+delaycal_field: PKS1934-63
+delaycal_solint: 60s
+delaycal_combine: ""
+# bandpass calibration
+bpasscal_field: PKS1934-63
+bpasscal_solint: inf
+bpasscal_combine: ""
+bpasscal_minsnr: 5
+bpasscal_interp: linear
+bpasscal_fillgaps: 70
+# gaincalibration
+gaincal_field: PKS1934-63
+gaincal_solint: 10s
+gaincal_minsnr: 5
+gaincal_interp: linear
+gaincal_combine: ""
+# apply calibration
+apply_target_interp: linear
+apply_gcal_interp: linear
+applymode: calflag
+
+# Image target
+image_name: NGC4993-den-attempt
+npix: [4096,4096]
+scale: 1asec
+weight: ["briggs", "-1.5"]
+niter: 100000000
+auto_mask: 20
+auto_threshold: 0.5
+channelsout: 3
+joinchannels: true
+image_column: CORRECTED_DATA
+image_field: 1
