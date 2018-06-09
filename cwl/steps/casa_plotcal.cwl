@@ -11,6 +11,10 @@ requirements:
     dockerImageId: ska-sa/den
 
   - class: InlineJavascriptRequirement
+  - class: InitialWorkDirRequirement
+    listing:
+    - entry: $(inputs.caltable)
+      writable: true
 
 
 baseCommand: python
@@ -42,6 +46,8 @@ arguments:
         }
         return values;
       }
+      
+      args["showhui"] = False
       print(args, file=sys.stderr)
       task = crasa.CasaTask("plotcal", **args)
       task.run()
@@ -107,6 +113,7 @@ inputs:
   showgui:
     type: boolean?
     doc: "Show plot on gui"
+    default: false
   caltable:
     type: Directory
     inputBinding:

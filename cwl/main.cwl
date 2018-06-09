@@ -70,24 +70,24 @@ outputs:
   ampuvwave_plot:
     type: File[]
     outputSource: inspect/gain_phase_plot
-  ap_plot:
-    type: File[]
-    outputSource: inspect/ap_plot
-  ampuvwave_plot:
-    type: File[]
-    outputSource: inspect/ampuvwave_plot
-  phaseuvwave_plot: 
-    type: File[]
-    outputSource: inspect/phaseuvwave_plot 
-  ampant_plot:
-    type: File[]
-    outputSource: inspect/ampant_plot
-  ampscan_gcal_plot:
-    type: File[]
-    outputSource: inspect/ampscan_gcal_plot 
-  ampscan_target_plot:
-    type: File[]
-    outputSource: inspect/ampscan_target_plot
+# ap_plot:
+#   type: File[]
+#   outputSource: inspect/ap_plot
+# ampuvwave_plot:
+#   type: File[]
+#   outputSource: inspect/ampuvwave_plot
+# phaseuvwave_plot: 
+#   type: File[]
+#   outputSource: inspect/phaseuvwave_plot 
+# ampant_plot:
+#   type: File[]
+#   outputSource: inspect/ampant_plot
+# ampscan_gcal_plot:
+#   type: File[]
+#   outputSource: inspect/ampscan_gcal_plot 
+# ampscan_target_plot:
+#   type: File[]
+#   outputSource: inspect/ampscan_target_plot
   calimage:
     type: File[]
     outputSource: selfcal/outimage
@@ -148,7 +148,7 @@ steps:
       bpasstable: crosscal/bpasstable
       gaintable: crosscal/gaintable
       delaytable: crosscal/delaytable
-    out: [delay_plot,bpass_amp_plot,bpass_phase_plot,gain_amp_plot,gain_phase_plot,ap_plot,ampuvwave_plot,phaseuvwave_plot,ampant_plot,ampscan_gcal_plot,ampscan_target_plot]
+    out: [delay_plot,bpass_amp_plot,bpass_phase_plot,gain_amp_plot,gain_phase_plot] #ap_plot,ampuvwave_plot,phaseuvwave_plot,ampant_plot,ampscan_gcal_plot,ampscan_target_plot]
      
 
   selfcal:
