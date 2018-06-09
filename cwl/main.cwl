@@ -20,6 +20,7 @@ inputs:
 # Cross clibration
   refant: string
   uvrange: string
+  target_field: string
   setmodel_standard: string
   setmodel_field: string
   delaycal_field: string
@@ -35,6 +36,10 @@ inputs:
   gaincal_solint: string
   gaincal_minsnr: float
   applymode: string
+# Inspect 1GC
+  inspect_plotprefix: string
+  inspect_avgchannel: int 
+  inspect_avgtime: string
 # Self calibration
   image_name: string
   npix: int[]
@@ -47,7 +52,6 @@ inputs:
   auto_threshold: float
   image_column: string
   image_field: int
-
 
 outputs:
   calimage:
@@ -73,8 +77,8 @@ steps:
 
     out: [flagged_ms]
 
-  cross_cal:
-    run: workflows/cross_cal.cwl
+  crosscal:
+    run: workflows/crosscal.cwl
     in:
       vis: flagging/flagged_ms
       refant: refant
@@ -94,14 +98,30 @@ steps:
       gaincal_solint: gaincal_solint
       gaincal_minsnr: gaincal_minsnr
       applymode: applymode
+      target_field: target_field
      
-    out: [crosscal_ms]
+    out: [crosscal_ms,delaytable,bpasstable,gaintable]
 
+
+  inspect:
+    run: workflows/inspect.cwl
+    in:
+      vis: crosscal/crosscal_ms
+      plotprefix: inspect_plotprefix
+      avgchannel: inspect_avgchannel
+      avgtime: inspect_avgtime
+      gaincal_field: gaincal_field
+      target_field: target_field
+      bpasstable: crosscal/bpasstable
+      gaintable: crosscal/gaintable
+      delaytable: crosscal/delaytable
+    out: [delay_plot,bpass_amp_plot,bpass_phase_plot,gain_amp_plot,gain_phase_plot,ap_plot,ampuvwave_plot,phaseuvwave_plot,ampant_plot,ampscan_gcal_plot,ampscan_target_plot]
+     
 
   selfcal:
     run: workflows/selfcal.cwl
     in:
-      ms: cross_cal/crosscal_ms
+      ms: crosscal/crosscal_ms
       image_name: image_name
       npix: npix
       scale: scale

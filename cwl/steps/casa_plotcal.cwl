@@ -3,13 +3,19 @@ cwlVersion: v1.0
 class: CommandLineTool
 
 requirements:
+  - class: SchemaDefRequirement
+    types: 
+      - $import: ../types/types.yaml
+
   - class: DockerRequirement
     dockerImageId: ska-sa/den
+
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:
-    - entry: $(inputs.caltable)
-      writable: false
+    - entry: $(inputs.vis)
+      writable: true
+
 
 baseCommand: python
 
@@ -46,72 +52,76 @@ arguments:
 
 inputs:
   xaxis:
-    type:
-      type: enum
-      symbols: [time,chan,freq,antenna,antenna1,antenna2,scan,amp,phase,real,imag,snr,tsys,delay,spgain]
+    type: string?
+#      type: string
+#      symbols: [time,chan,freq,antenna,antenna1,antenna2,scan,amp,phase,real,imag,snr,tsys,delay,spgain]
     doc: "Value to plot along x axis (time,chan,freq,antenna,antenna1,antenna2,scan,amp,phase,real,imag,snr,tsys,delay,spgain)"
   yaxis:
-    type:
-      type: enum
-      symbols: [time,chan,freq,antenna,antenna1,antenna2,scan,amp,phase,real,imag,snr,tsys,delay,spgain]
+    type: string?
+#      type: string
+#      symbols: [time,chan,freq,antenna,antenna1,antenna2,scan,amp,phase,real,imag,snr,tsys,delay,spgain]
     doc: "Value to plot along y axis (time,chan,freq,antenna,antenna1,antenna2,scan,amp,phase,real,imag,snr,tsys,delay,spgain)"
   poln:
-    type:
-      type: enum
-      symbols: [RL,R,L,XY,X,Y,/]
+    type: string?
+#      type: string #enum
+#      symbols: [RL,R,L,XY,X,Y,/]
     doc: "Antenna polarization to plot (RL,R,L,XY,X,Y,/)"
   field:
-    type: string
+    type: string?
     doc: "field names or index of calibrators: ''==>all"
   antenna:
-    type: string
+    type: string?
     doc: "antenna/baselines: ''==>all, antenna = '3,VA04'"
   spw:
-    type: string
+    type: string?
     doc: "spectral window:channels: ''==>all, spw='1:5~57'"
   timerange:
-    type: string
+    type: string?
     doc: "time range: ''==>all"
   subplot:
-    type: int
+    type: int?
     doc: "Panel number on display screen (yxn)"
   overplot:
-    type: boolean
+    type: boolean?
     doc: "Overplot solutions on existing display"
   clearpanel:
-    type: string
+    type: string?
     doc: "Specify if old plots are cleared or not (ignore)"
   iteration:
-    type: string
+    type: string?
     doc: "Iterate plots on antenna,time,spw,field"
   plotrange:
-    type: float[]
+    type: float[]?
     doc: "plot axes ranges: [xmin,xmax,ymin,ymax]"
   showflags:
-    type: boolean
+    type: boolean?
     doc: "If true, show flagged solutions"
   plotsymbol:
-    type: string
+    type: string?
     doc: "pylab plot symbol"
   plotcolor:
-    type: string
+    type: string?
     doc: "initial plotting color"
   markersize:
-    type: float
+    type: float?
     doc: "Size of plotted marks"
   fontsize:
-    type: float
+    type: float?
     doc: "Font size for labels"
   showgui:
-    type: boolean
+    type: boolean?
     doc: "Show plot on gui"
   caltable:
-    type: File
+    type: Directory
+    inputBinding:
+        valueFrom: $(self.path)
     doc: "Name of input calibration table"
+  figfile:
+    type: string
 
 outputs:
-  figfile:
-    type: File
+  plotfile:
+    type: File[]
     doc: "''= no plot hardcopy, otherwise supply name"
     outputBinding:
-      glob: figfile
+      glob: $(inputs.figfile)*.png

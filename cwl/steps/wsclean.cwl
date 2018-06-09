@@ -290,13 +290,13 @@ inputs:
       prefix: -interval
       separate: true
       position: 49
-  intervalsout:
+  intervals-out:
     type: int?
     doc: "Number of intervals to image inside the selected global interval"
     inputBinding:
       prefix: -intervalsout
       position: 50
-  channelrange:
+  channel-range:
     type: int[]?
     doc: "Only image the given channel range. Indices specify channel indices, end index is exclusive"
     inputBinding:
@@ -316,11 +316,11 @@ inputs:
       prefix: -spws
       separate: true
       position: 53
-  datacolumn:
+  data-column:
     type: string?
     doc: "CORRECTED_DATA if it exists, otherwise DATA will be used."
     inputBinding:
-      prefix: -datacolumn
+      prefix: -data-column
       position: 54
   maxuvw-m:
     type: float?
@@ -400,7 +400,7 @@ inputs:
     inputBinding:
       prefix: -mgain
       position: 67
-  joinpolarizations:
+  join-polarizations:
     type: boolean?
     doc: "Perform cleaning by searching for peaks in the sum of squares of the polarizations, but subtract components from the individual images. Only possible when imaging two or four Stokes or linear parameters"
     inputBinding:

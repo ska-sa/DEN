@@ -16,6 +16,7 @@ autoflag_strategy:
 ### Cross calibration
 refant: m043
 uvrange: ">300"
+target_field: NGC4993_off
 # setmodel
 setmodel_standard: "Perley-Butler 2010"
 setmodel_field: PKS1934-63
@@ -40,6 +41,11 @@ gaincal_combine: ""
 apply_target_interp: linear
 apply_gcal_interp: linear
 applymode: calflag
+
+### Inspect
+inspect_plotprefix: NGC4993-den-attempt
+inspect_avgchannel: 32
+inspect_avgtime: 8s
 
 # Image target
 image_name: NGC4993-den-attempt

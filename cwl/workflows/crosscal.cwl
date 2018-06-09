@@ -12,6 +12,7 @@ requirements:
 inputs:
   vis: Directory
   refant: string
+  target_field: string
   uvrange: string
   setmodel_standard: string
   setmodel_field: string
@@ -31,6 +32,15 @@ inputs:
 
 
 outputs:
+  delaytable:
+    type: Directory
+    outputSource: delaycal/caltable
+  bpasstable:
+    type: Directory
+    outputSource: bpasscal/caltable
+  gaintable:
+    type: Directory
+    outputSource: gaincal/caltable
   crosscal_ms:
     type: Directory
     outputSource: applycal_target_field/vis_out
@@ -121,7 +131,7 @@ steps:
     run: ../steps/casa_applycal.cwl
     in:
       vis: applycal_gaincal_field/vis_out
-      field: gaincal_field
+      field: target_field
       gaintable: [delaycal/caltable,bpasscal/caltable,gaincal/caltable]
       gainfield: [delaycal_field,bpasscal_field,gaincal_field]
 #      interp:
