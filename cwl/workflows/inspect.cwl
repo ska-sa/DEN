@@ -16,8 +16,7 @@ inputs:
   delaytable: Directory
   bpasstable: Directory
   gaintable: Directory
-  plotprefix: string
-  avgchannel: int
+  avgchannel: string
   avgtime: string
 
 outputs:
@@ -65,7 +64,7 @@ steps:
       yaxis:
          valueFrom: delay
       figfile:
-        valueFrom: $(inputs.plotprefix)-delaycal.png
+        valueFrom: delaycal.png
     out: [plotfile]
 
   plotbpass_amp:
@@ -77,7 +76,7 @@ steps:
       yaxis:
         valueFrom: amp
       figfile:
-        valueFrom: $(inputs.plotprefix)-bpasscal-amp.png
+        valueFrom: bpasscal-amp.png
     out: [plotfile]
 
   plotbpass_phase:
@@ -89,7 +88,7 @@ steps:
       yaxis:
         valueFrom: phase
       figfile:
-        valueFrom: $(inputs.plotprefix)-bpasscal-phase.png
+        valueFrom: bpasscal-phase.png
     out: [plotfile]
 
   plotgain_amp:
@@ -101,7 +100,7 @@ steps:
       yaxis:
         valueFrom: amp
       figfile:
-        valueFrom: $(inputs.plotprefix)-gaincal-amp.png
+        valueFrom: gaincal-amp.png
     out: [plotfile]
 
   plotgain_phase:
@@ -113,7 +112,7 @@ steps:
       yaxis:
         valueFrom: phase
       figfile:
-        valueFrom: $(inputs.plotprefix)-gaincal-phase.png
+        valueFrom: gaincal-phase.png
     out: [plotfile]
 
   plotvis_ap:
@@ -132,7 +131,7 @@ steps:
       avgchannel: avgchannel
       avgtime: avgtime
       plotfile:
-        valueFrom: $(inputs.plotprefix)-gain-ap.png
+        valueFrom: gain-ap.png
     out: [plotfiles]
 
   plotvis_ampuvwave:
@@ -151,7 +150,7 @@ steps:
       avgchannel: avgchannel
       avgtime: avgtime
       plotfile:
-        valueFrom: $(inputs.plotprefix)-ampuvwave.png
+        valueFrom: ampuvwave.png
     out: [plotfiles]
 
   plotvis_phaseuvwave:
@@ -170,7 +169,7 @@ steps:
       avgchannel: avgchannel
       avgtime: avgtime
       plotfile:
-        valueFrom: $(inputs.plotprefix)-phaseuvwave.png
+        valueFrom: phaseuvwave.png
     out: [plotfiles]
 
   plotvis_ampant:
@@ -187,7 +186,7 @@ steps:
       avgchannel: avgchannel
       avgtime: avgtime
       plotfile:
-        valueFrom: $(inputs.plotprefix)-ampant.png
+        valueFrom: ampant.png
     out: [plotfiles]
 
   plotvis_ampscan_gcal:
@@ -204,7 +203,7 @@ steps:
       avgchannel: avgchannel
       avgtime: avgtime
       plotfile:
-        valueFrom: $(inputs.plotprefix)-ampscan-gcal.png
+        valueFrom: ampscan-gcal.png
     out: [plotfiles]
 
   plotvis_ampscan_target:
@@ -221,5 +220,5 @@ steps:
       avgchannel: avgchannel
       avgtime: avgtime
       plotfile:
-        valueFrom: $(inputs.plotprefix)-ampscan_target.png
+        valueFrom: ampscan_target.png
     out: [plotfiles]

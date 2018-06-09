@@ -11,10 +11,6 @@ requirements:
     dockerImageId: ska-sa/den
 
   - class: InlineJavascriptRequirement
-  - class: InitialWorkDirRequirement
-    listing:
-    - entry: $(inputs.vis)
-      writable: true
 
 
 baseCommand: python

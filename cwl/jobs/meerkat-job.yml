@@ -43,8 +43,7 @@ apply_gcal_interp: linear
 applymode: calflag
 
 ### Inspect
-inspect_plotprefix: NGC4993-den-attempt
-inspect_avgchannel: 32
+inspect_avgchannel: "32"
 inspect_avgtime: 8s
 
 # Image target

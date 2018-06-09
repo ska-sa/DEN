@@ -37,8 +37,7 @@ inputs:
   gaincal_minsnr: float
   applymode: string
 # Inspect 1GC
-  inspect_plotprefix: string
-  inspect_avgchannel: int 
+  inspect_avgchannel: string
   inspect_avgtime: string
 # Self calibration
   image_name: string
@@ -107,7 +106,6 @@ steps:
     run: workflows/inspect.cwl
     in:
       vis: crosscal/crosscal_ms
-      plotprefix: inspect_plotprefix
       avgchannel: inspect_avgchannel
       avgtime: inspect_avgtime
       gaincal_field: gaincal_field

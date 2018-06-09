@@ -107,7 +107,7 @@ inputs:
     type: boolean?
     doc: "Average data"
   avgchannel:
-    type: int
+    type: string
     doc: "Average over channel?  (blank = False, otherwise value in channels)"
   avgtime:
     type: string?
