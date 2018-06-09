@@ -53,6 +53,41 @@ inputs:
   image_field: int
 
 outputs:
+  delay_plot:
+    type: File[]
+    outputSource: inspect/delay_plot
+  bpass_amp_plot:
+    type: File[]
+    outputSource: inspect/bpass_amp_plot
+  bpass_phase_plot:
+   type: File[]
+   outputSource: inspect/bpass_phase_plot
+  gain_amp_plot:
+    type: File[]
+    outputSource: inspect/gain_amp_plot
+  gain_phase_plot:
+    type: File[]
+  ampuvwave_plot:
+    type: File[]
+    outputSource: inspect/gain_phase_plot
+  ap_plot:
+    type: File[]
+    outputSource: inspect/ap_plot
+  ampuvwave_plot:
+    type: File[]
+    outputSource: inspect/ampuvwave_plot
+  phaseuvwave_plot: 
+    type: File[]
+    outputSource: inspect/phaseuvwave_plot 
+  ampant_plot:
+    type: File[]
+    outputSource: inspect/ampant_plot
+  ampscan_gcal_plot:
+    type: File[]
+    outputSource: inspect/ampscan_gcal_plot 
+  ampscan_target_plot:
+    type: File[]
+    outputSource: inspect/ampscan_target_plot
   calimage:
     type: File[]
     outputSource: selfcal/outimage

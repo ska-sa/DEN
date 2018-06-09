@@ -40,6 +40,7 @@ arguments:
         }
         return values;
       }
+      args["avgchannel"] = str(args["avgchannel"])
       print(args, file=sys.stderr)
       task = crasa.CasaTask("plotms", **args)
       task.run()
@@ -109,6 +110,7 @@ inputs:
   avgchannel:
     type: string
     doc: "Average over channel?  (blank = False, otherwise value in channels)"
+    default: "1"
   avgtime:
     type: string?
     doc: "Average over time? (blank = False, otherwise value in seconds)"
