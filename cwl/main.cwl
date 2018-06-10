@@ -67,8 +67,6 @@ outputs:
     outputSource: inspect/gain_amp_plot
   gain_phase_plot:
     type: File[]
-  ampuvwave_plot:
-    type: File[]
     outputSource: inspect/gain_phase_plot
 # ap_plot:
 #   type: File[]
