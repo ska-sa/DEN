@@ -11,6 +11,10 @@ requirements:
     dockerImageId: ska-sa/den
 
   - class: InlineJavascriptRequirement
+  - class: InitialWorkDirRequirement
+    listing:
+    - entry: $(inputs.caltable)
+      writable: true
 
 
 baseCommand: python
@@ -42,7 +46,10 @@ arguments:
         }
         return values;
       }
+      
+      args["showgui"] = False
       print(args, file=sys.stderr)
+      print("\n")
       task = crasa.CasaTask("plotcal", **args)
       task.run()
 
@@ -107,10 +114,9 @@ inputs:
   showgui:
     type: boolean?
     doc: "Show plot on gui"
+    default: false
   caltable:
     type: Directory
-    inputBinding:
-        valueFrom: $(self.path)
     doc: "Name of input calibration table"
   figfile:
     type: string
@@ -120,4 +126,4 @@ outputs:
     type: File[]
     doc: "''= no plot hardcopy, otherwise supply name"
     outputBinding:
-      glob: $(inputs.figfile)*.png
+      glob: "*.png"

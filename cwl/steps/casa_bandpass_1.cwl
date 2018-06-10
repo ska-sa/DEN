@@ -150,13 +150,9 @@ inputs:
   gaintable:
     type: Directory?
     doc: "Gain calibration table(s) to apply on the fly"
-    inputBinding:
-      valueFrom: $(self.path)
   callib:
     type: File?
     doc: "Cal Library filename"
-    inputBinding:
-      valueFrom: $(self.path)
   caltable_name:
     type: string?
     doc: "Name of output gain calibration table"

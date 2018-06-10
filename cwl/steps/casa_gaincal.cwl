@@ -143,18 +143,11 @@ inputs:
   vis:
     type: Directory
     doc: "Name of input visibility file"
-    inputBinding:
-      valueFrom: $(self.path)
   callib:
     type: File?
     doc: "Cal Library filename"
-    inputBinding:
-      valueFrom: $(self.path)
   gaintable:
     type: Directory[]?
-    doc: "Gain calibration table(s) to apply on the fly"
-    inputBinding:
-      valueFrom: $(self.path)
   caltable_name:
     type: string?
     doc: "Name Output gain calibration table"

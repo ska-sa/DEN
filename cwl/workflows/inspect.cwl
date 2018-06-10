@@ -35,24 +35,24 @@ outputs:
   gain_phase_plot:
     type: File[]
     outputSource: plotgain_phase/plotfile
-  ap_plot:
-    type: File[]
-    outputSource: plotvis_ap/plotfiles
-  phaseuvwave_plot:
-    type: File[]
-    outputSource: plotvis_phaseuvwave/plotfiles
-  ampuvwave_plot:
-    type: File[]
-    outputSource: plotvis_ampuvwave/plotfiles
-  ampant_plot:
-    type: File[]
-    outputSource: plotvis_ampant/plotfiles
-  ampscan_gcal_plot:
-    type: File[]
-    outputSource: plotvis_ampscan_gcal/plotfiles
-  ampscan_target_plot:
-    type: File[]
-    outputSource: plotvis_ampscan_target/plotfiles
+# ap_plot:
+#   type: File[]
+#   outputSource: plotvis_ap/plotfiles
+# phaseuvwave_plot:
+#   type: File[]
+#   outputSource: plotvis_phaseuvwave/plotfiles
+# ampuvwave_plot:
+#   type: File[]
+#   outputSource: plotvis_ampuvwave/plotfiles
+# ampant_plot:
+#   type: File[]
+#   outputSource: plotvis_ampant/plotfiles
+# ampscan_gcal_plot:
+#   type: File[]
+#   outputSource: plotvis_ampscan_gcal/plotfiles
+# ampscan_target_plot:
+#   type: File[]
+#   outputSource: plotvis_ampscan_target/plotfiles
 
 steps:
   plotdelay:
@@ -115,110 +115,110 @@ steps:
         valueFrom: gaincal-phase.png
     out: [plotfile]
 
-  plotvis_ap:
-    run: ../steps/casa_plotms.cwl
-    in:
-      vis: vis
-      xasis:
-        valueFrom: phase
-      yaxis:
-        valueFrom: amp
-      field: gaincal_field
-      correlation:
-        valueFrom: XX,YY
-      iterxis:
-        valueFrom: corr
-      avgchannel: avgchannel
-      avgtime: avgtime
-      plotfile:
-        valueFrom: gain-ap.png
-    out: [plotfiles]
+# plotvis_ap:
+#   run: ../steps/casa_plotms.cwl
+#   in:
+#     vis: vis
+#     xasis:
+#       valueFrom: phase
+#     yaxis:
+#       valueFrom: amp
+#     field: gaincal_field
+#     correlation:
+#       valueFrom: XX,YY
+#     iterxis:
+#       valueFrom: corr
+#     avgchannel: avgchannel
+#     avgtime: avgtime
+#     plotfile:
+#       valueFrom: gain-ap.png
+#   out: [plotfiles]
 
-  plotvis_ampuvwave:
-    run: ../steps/casa_plotms.cwl
-    in:
-      vis: vis
-      xasis:
-        valueFrom: uvwave
-      yaxis:
-        valueFrom: amp
-      field: gaincal_field
-      correlation:
-        valueFrom: XX,YY
-      iterxis:
-        valueFrom: corr
-      avgchannel: avgchannel
-      avgtime: avgtime
-      plotfile:
-        valueFrom: ampuvwave.png
-    out: [plotfiles]
+# plotvis_ampuvwave:
+#   run: ../steps/casa_plotms.cwl
+#   in:
+#     vis: vis
+#     xasis:
+#       valueFrom: uvwave
+#     yaxis:
+#       valueFrom: amp
+#     field: gaincal_field
+#     correlation:
+#       valueFrom: XX,YY
+#     iterxis:
+#       valueFrom: corr
+#     avgchannel: avgchannel
+#     avgtime: avgtime
+#     plotfile:
+#       valueFrom: ampuvwave.png
+#   out: [plotfiles]
 
-  plotvis_phaseuvwave:
-    run: ../steps/casa_plotms.cwl
-    in:
-      vis: vis
-      xasis:
-        valueFrom: uvwave
-      yaxis:
-        valueFrom: phase
-      field: gaincal_field
-      correlation:
-        valueFrom: XX,YY
-      iterxis:
-        valueFrom: corr
-      avgchannel: avgchannel
-      avgtime: avgtime
-      plotfile:
-        valueFrom: phaseuvwave.png
-    out: [plotfiles]
+# plotvis_phaseuvwave:
+#   run: ../steps/casa_plotms.cwl
+#   in:
+#     vis: vis
+#     xasis:
+#       valueFrom: uvwave
+#     yaxis:
+#       valueFrom: phase
+#     field: gaincal_field
+#     correlation:
+#       valueFrom: XX,YY
+#     iterxis:
+#       valueFrom: corr
+#     avgchannel: avgchannel
+#     avgtime: avgtime
+#     plotfile:
+#       valueFrom: phaseuvwave.png
+#   out: [plotfiles]
 
-  plotvis_ampant:
-    run: ../steps/casa_plotms.cwl
-    in:
-      vis: vis
-      xasis:
-        valueFrom: antenna
-      yaxis:
-        valueFrom: amp
-      field: gaincal_field
-      correlation:
-        valueFrom: XX,YY
-      avgchannel: avgchannel
-      avgtime: avgtime
-      plotfile:
-        valueFrom: ampant.png
-    out: [plotfiles]
+# plotvis_ampant:
+#   run: ../steps/casa_plotms.cwl
+#   in:
+#     vis: vis
+#     xasis:
+#       valueFrom: antenna
+#     yaxis:
+#       valueFrom: amp
+#     field: gaincal_field
+#     correlation:
+#       valueFrom: XX,YY
+#     avgchannel: avgchannel
+#     avgtime: avgtime
+#     plotfile:
+#       valueFrom: ampant.png
+#   out: [plotfiles]
 
-  plotvis_ampscan_gcal:
-    run: ../steps/casa_plotms.cwl
-    in:
-      vis: vis
-      xasis:
-        valueFrom: scan
-      yaxis:
-        valueFrom: amp
-      field: gaincal_field
-      correlation:
-        valueFrom: XX,YY
-      avgchannel: avgchannel
-      avgtime: avgtime
-      plotfile:
-        valueFrom: ampscan-gcal.png
-    out: [plotfiles]
+# plotvis_ampscan_gcal:
+#   run: ../steps/casa_plotms.cwl
+#   in:
+#     vis: vis
+#     xasis:
+#       valueFrom: scan
+#     yaxis:
+#       valueFrom: amp
+#     field: gaincal_field
+#     correlation:
+#       valueFrom: XX,YY
+#     avgchannel: avgchannel
+#     avgtime: avgtime
+#     plotfile:
+#       valueFrom: ampscan-gcal.png
+#   out: [plotfiles]
 
-  plotvis_ampscan_target:
-    run: ../steps/casa_plotms.cwl
-    in:
-      vis: vis
-      xasis:
-        valueFrom: scan
-      yaxis:
-        valueFrom: amp
-      field: target_field
-      correlation:
-        valueFrom: XX,YY
-      avgchannel: avgchannel
-      avgtime: avgtime
-      plotfile:
-        valueFrom: ampscan_target.png
-    out: [plotfiles]
+# plotvis_ampscan_target:
+#   run: ../steps/casa_plotms.cwl
+#   in:
+#     vis: vis
+#     xasis:
+#       valueFrom: scan
+#     yaxis:
+#       valueFrom: amp
+#     field: target_field
+#     correlation:
+#       valueFrom: XX,YY
+#     avgchannel: avgchannel
+#     avgtime: avgtime
+#     plotfile:
+#       valueFrom: ampscan_target.png
+#   out: [plotfiles]
