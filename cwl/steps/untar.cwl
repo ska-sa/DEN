@@ -5,7 +5,7 @@ baseCommand: tar
 
 hints:
   DockerRequirement:
-      dockerPull: ska-sa/den 
+      dockerPull: sphemakh/den 
 
 arguments: 
   - xvf

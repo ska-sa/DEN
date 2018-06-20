@@ -8,7 +8,7 @@ requirements:
       - $import: ../types/types.yaml
 
   - class: DockerRequirement
-    dockerImageId: ska-sa/den
+    dockerPull: sphemakh/den
 
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement

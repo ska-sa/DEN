@@ -7,7 +7,7 @@ requirements:
     types:
       - $import: ../types/types.yaml
   - class: DockerRequirement
-    dockerImageId: ska-sa/den
+    dockerPull: sphemakh/den
   - class: InitialWorkDirRequirement
     listing:
     - entry: $(inputs.vis)

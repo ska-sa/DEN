@@ -3,7 +3,7 @@ class: CommandLineTool
 
 requirements:
   - class: DockerRequirement
-    dockerImageId: ska-sa/den
+    dockerPull: sphemakh/den
   - class: InlineJavascriptRequirement
   - class: InitialWorkDirRequirement
     listing:

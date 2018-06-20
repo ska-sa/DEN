@@ -18,5 +18,15 @@ run: .venv2/bin/cwltool docker
 		cwl/main.cwl \
 		cwl/jobs/meerkat-job.yml
 
+srun: .venv2/bin/cwltool
+	.venv2/bin/cwltool \
+		--singularity \
+		--tmpdir=$(PWD)/results/tmp/ \
+		--cachedir=$(PWD)/results/cache/ \
+		--outdir=$(PWD)/results/results/ \
+        --verbose \
+		cwl/main.cwl \
+		cwl/jobs/meerkat-job.yml
+
 docker:
 	docker build -t ska-sa/den .
